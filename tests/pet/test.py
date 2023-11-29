@@ -2,7 +2,7 @@ import json
 
 from openapi_client import PutPetProps, Pet
 
-from src.apis import petsApi
+from tests.apis import petApi
 
 
 class Test:
@@ -15,16 +15,16 @@ class Test:
         for obj in data:
             PutPetProps.model_validate(obj)
         for obj in data:
-            pet = petsApi.put(PutPetProps(**obj))
+            pet = petApi.put(PutPetProps(**obj))
             cls.created_pets.append(pet)
 
     def test_get_pets(self):
-        all_ids = [p.id for p in petsApi.get_items()]
+        all_ids = [p.id for p in petApi.get_items()]
         for pet in self.created_pets:
             assert pet.id in all_ids
 
     @classmethod
     def teardown_method(cls):
         for pet in cls.created_pets:
-            petsApi.delete(pet.id)
+            petApi.delete(pet.id)
         cls.created_pets = []

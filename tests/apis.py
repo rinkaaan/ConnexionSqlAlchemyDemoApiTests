@@ -5,4 +5,4 @@ configuration = openapi_client.Configuration(
 )
 
 api = openapi_client.ApiClient(configuration)
-petsApi = openapi_client.PetsApi(api)
+petApi = openapi_client.PetApi(api)
